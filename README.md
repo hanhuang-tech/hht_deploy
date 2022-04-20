@@ -4,11 +4,11 @@
 **Dockerfile**  
 From an Alpine image, copy across wild_cert_gen.sh to root inside the created container.  
 Run below required instructions:  
-apk upgrade  
-add certbot  
-add bash   
+- apk upgrade  
+- add certbot  
+- add bash   
 
-**run_cert_gen.sh**  
+**cert_gen.sh**  
 Docker run: Creates a container called cert_gen that is interactive.  
 Mounts on host storage a directory called "certs" onto target /etc/letsencrypt in the container.  
 Starts a bash session within this container.  
