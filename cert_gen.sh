@@ -5,6 +5,6 @@ docker run \
 --name cert_gen \
 -v ${PWD}/certs:/etc/letsencrypt \
 -p \
-80:80 \
+2000:2000 \
 cert_gen bash
 

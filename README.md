@@ -13,7 +13,7 @@ Run below required instructions:
 - apk upgrade  
 - add certbot  
 - add bash  
-- expose port 80  
+- expose port 2000  
   
 **cert_gen.sh**  
 docker run: Creates a container called cert_gen that is interactive in terminal.  
