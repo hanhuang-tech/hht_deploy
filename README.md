@@ -2,7 +2,7 @@
 - Creates a container for certbot and executes certbot commands on a mounted container.  
   
 To use:  
-1. docker build -t cert_gen    #generates cert_gen docker image from Dockerfile  
+1. docker build -t cert_gen .    #generates cert_gen docker image from Dockerfile  
 2. bash cert_gen.sh    #starts new container using docker image cert_gen, runs bash inside container  
 3. bash certbot_dns.sh    #bash this shell script to generate new certbot certificate  
 ***
