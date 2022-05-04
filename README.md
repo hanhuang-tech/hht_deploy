@@ -1,4 +1,4 @@
-# cert_gen_docker
+# certgen_docker
 - Creates a container for certbot and executes certbot commands on a mounted container.  
   
 To use:  
