@@ -1,2 +1,3 @@
 #!/bin/bash
-certbot certonly \
+certbot certonly --webrooty
+
