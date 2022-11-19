@@ -1,0 +1,21 @@
+services:
+  certbot_gen:
+    build: ./certbot_gen
+    ports:
+     - "2000:2000"
+    volumes:
+     - ./certbot_gen/certs:/etc/letsencrypt
+     - ./certbot_gen:/acme-challenge
+  web:
+    build: ./web
+    ports:
+     - "80:80"
+     - "443:443"
+    volumes:
+     - ./web/conf/nginx.conf:/etc/nginx/nginx.conf
+     - ./web/conf/hanhuang.tech.conf:/etc/nginx/conf.d/hanhuang.tech.conf
+     - ./web/conf/clothingsite.conf:/etc/nginx/conf.d/clothingsite.conf
+     - ../hht/hanhuang.tech:/usr/share/nginx/html/hanhuang.tech
+     - ../hht/clothingsite.hanhuang.tech:/usr/share/nginx/html/clothingsite.hanhuang.tech	
+     - /letsencrypt
+     - /certs:/etc/letsencrypt
