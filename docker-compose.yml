@@ -5,7 +5,7 @@ services:
      - "2000:2000"
     volumes:
      - ./certbot_gen/certs:/etc/letsencrypt
-     - ./certbot_gen:/acme-challenge
+     - ./certbot_gen/gen-certs:/gen-certs
   web:
     build: ./web
     ports:
@@ -17,5 +17,5 @@ services:
      - ./web/conf/clothingsite.conf:/etc/nginx/conf.d/clothingsite.conf
      - ../hht/hanhuang.tech:/usr/share/nginx/html/hanhuang.tech
      - ../hht/clothingsite.hanhuang.tech:/usr/share/nginx/html/clothingsite.hanhuang.tech	
-     - /letsencrypt
-     - /certs:/etc/letsencrypt
+     - ./certbot_gen/certs:/etc/letsencrypt
+     - ./certbot_gen:/acme-challenge
