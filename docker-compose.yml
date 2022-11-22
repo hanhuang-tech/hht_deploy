@@ -1,11 +1,4 @@
 services:
-  certbot_gen:
-    build: ./certbot_gen
-    ports:
-     - "2000:2000"
-    volumes:
-     - ./certbot_gen/certs:/etc/letsencrypt
-     - ./certbot_gen/gen-certs:/gen-certs
   web:
     build: ./web
     ports:
@@ -18,4 +11,8 @@ services:
      - ../hht/hanhuang.tech:/usr/share/nginx/html/hanhuang.tech
      - ../hht/clothingsite.hanhuang.tech:/usr/share/nginx/html/clothingsite.hanhuang.tech	
      - ./certbot_gen/certs:/etc/letsencrypt
-     - ./certbot_gen:/acme-challenge
+  cron:
+    image: alpine:latest
+    command: crond -f -l 8
+    volumes:
+     - ./cronjobs:/etc/crontabs/root
