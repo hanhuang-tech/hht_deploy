@@ -2,4 +2,5 @@
 docker build -t certbot_gen certbot_gen
 bash ${PWD}/certbot_gen/certbot-gen.sh
 docker stop certbot_gen
-bash docker-compose.yml
+echo '>certs generated, running docker-compose.'
+docker-compose up -d
