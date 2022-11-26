@@ -12,12 +12,11 @@ services:
             - ../hht/hanhuang.tech:/usr/share/nginx/html/hanhuang.tech
             - ../hht/clothingsite.hanhuang.tech:/usr/share/nginx/html/clothingsite	
             - ./certbot_gen/certs:/etc/letsencrypt
-    cron:
-        image: alpine:latest
-        command: crond -f -l 8
+    cert-renew:
+        build: ./cert_renew
         ports:
             - "2000:2000"
         volumes:
-            - ./cronjobs:/etc/crontabs/root
+            - ./cert_renew/cert-renew.sh:/cert-renew.sh
+            - ./cert_renew/cronjobs:/etc/crontabs/root
             - ./certbot_gen/certs:/etc/letsencrypt
-
