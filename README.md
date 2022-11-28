@@ -28,3 +28,6 @@ Default webroot- shared with webserver: /letsencrypt
 conf file from inside the container:  
     location /.well-known/acme-challenge/ {  
         root /letsencrypt/;  
+
+
+cron: At 12:00 in every month

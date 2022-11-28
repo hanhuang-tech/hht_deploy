@@ -1,4 +1,4 @@
 FROM alpine:latest
-WORKDIR /cert-renew
-EXPOSE 2000
-
+RUN apk add certbot
+COPY ./cronjobs /etc/crontabs/root
+CMD ["crond", "-f", "-d", "8"]
