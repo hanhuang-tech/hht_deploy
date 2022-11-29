@@ -2,7 +2,5 @@
 docker build -t certbot_gen certbot_gen
 bash ${PWD}/certbot_gen/certbot-gen.sh
 docker stop certbot_gen
-echo '> certs generated, running docker-compose.'
+echo -e "\e[1mcerts generated, running docker-compose\e[0m"
 docker-compose up -d
-docker exec -it hht_deploy-cert-renew-1 /cert-renew.sh
-

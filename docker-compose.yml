@@ -17,7 +17,5 @@ services:
         ports:
             - "2000:2000"
         volumes:
-            - ./cert_renew/cert-renew.sh:/cert-renew.sh
-            - ./cert_renew/cronjobs:/etc/crontabs/cronjobs
             - ./certbot_gen/certs:/etc/letsencrypt
 
