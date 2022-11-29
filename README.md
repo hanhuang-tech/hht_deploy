@@ -1,9 +1,9 @@
 # hht-deploy
 - Creates a container for certbot and executes certbot commands on a mounted container.  
   
-###To use:  
-    bash hht-deploy.sh
-***
+### To use:  
+`bash hht-deploy.sh`
+---
 **certbot_gen.sh**
 - /bin/sh script for the below commands
 - Run interactively, on a docker container
