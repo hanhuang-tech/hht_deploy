@@ -14,8 +14,6 @@ services:
             - ./certbot_gen/certs:/etc/letsencrypt
     cert-renew:
         build: ./cert_renew
-        ports:
-            - "2000:2000"
         volumes:
             - ./certbot_gen/certs:/etc/letsencrypt
 
