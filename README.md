@@ -1,9 +1,24 @@
 # hht-deploy
-- Creates a container for certbot and executes certbot commands on a mounted container.  
+- Creates containers to deploy the hht frontend static site
+	- Bash shell script to automate build and run of dependencies
+	- Temporary creation and removal of container to generate TLS certificates using certbot
+	- Container with cron job to renew letsencrypt certificates that runs every month
+	- Nginx container with reverse proxy to server name hanhuang.tech using conf files
   
 ### To use:  
 ```
+# pull hht repository from git@github.com:hanhuang-tech/hht.git into ${PWD}/../hht
+# cd back into this folder, then 
 bash hht-deploy.sh
+```
+### Features:
+```
+# bash shell script
+# docker/docker-compose
+# cron
+# letsencrypt/certbot
+# nginx
+# dependencies: hht-deploy.sh, certbot_gen, cert_renew, web
 ```
 ---   
 ### certbot_gen.sh
