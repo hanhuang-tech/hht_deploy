@@ -7,8 +7,13 @@
   
 ### To use:  
 ```
-# pull hht repository from git@github.com:hanhuang-tech/hht.git into ${PWD}/../hht
-# cd back into this folder, then 
+mkdir hht
+cd hht	#/hht
+git init
+git pull git@github.com:hanhuang-tech/hht.git
+cd ..	#../hht
+mkdir hht_deploy
+cd hht_deploy	#hht_deploy
 bash hht-deploy.sh
 ```
 ### Features:
