@@ -1,20 +1,22 @@
+![code](https://hanhuang.tech/img/html.png)
 # hht-deploy
 - Creates containers to deploy the hht frontend static site
-	- Bash shell script to automate build and run of dependencies
-	- Temporary creation and removal of container to generate TLS certificates using certbot
+	- Shell script to automate build and running of dependencies
+	- Temporary creation and removal of container and generation of TLS certificates using certbot
 	- Container with cron job to renew letsencrypt certificates that runs every month
 	- Nginx container with reverse proxy to server name hanhuang.tech using conf files
   
 ### To use:  
+>Requirements: /hht pulled from git@github.com:hanhuang-tech/hht.git
 ```
-mkdir hht
-cd hht	#/hht
-git init
-git pull git@github.com:hanhuang-tech/hht.git
-cd ..	#../hht
-mkdir hht_deploy
-cd hht_deploy	#hht_deploy
-bash hht-deploy.sh
+mkdir hht  
+cd hht  
+git init  
+git pull git@github.com:hanhuang-tech/hht.git  
+cd ..  
+mkdir hht_deploy  
+cd hht_deploy  
+bash hht-deploy.sh  
 ```
 ### Features:
 ```
@@ -23,17 +25,55 @@ bash hht-deploy.sh
 # cron
 # letsencrypt/certbot
 # nginx
-# dependencies: hht-deploy.sh, certbot_gen, cert_renew, web
+```
+```
+### Dependencies & tree:
+>hht-deploy.sh, docker-compose.yml, certbot_gen, cert_renew, web
+```
+├── hht
+│   ├── clothingsite
+│   ├── hanhuang.tech
+│   └── README.md
+└── hht_deploy
+    ├── certbot_gen
+    │   ├── certbot-gen.sh
+    │   ├── certs.conf
+    │   ├── Dockerfile
+    │   └── gen-certs
+    │       └── certonly.sh
+    ├── cert_renew
+    │   ├── cronjobs
+    │   ├── Dockerfile
+    │   └── run-renew.sh
+    ├── docker-compose.yml
+    ├── hht-deploy.sh
+    ├── LICENSE
+    ├── README.md
+    └── web
+        ├── conf
+        │   ├── clothingsite.conf
+        │   ├── hanhuang.tech.conf
+        │   └── nginx.conf
+        ├── Dockerfile
+        └── html
+            ├── clothingsite
+            ├── hanhuang.tech
+            └── info
 ```
 ---   
-### certbot_gen.sh
+### certbot_gen
 - /bin/sh script for the below commands.   
 ```
-docker run -it
-```
-Run interactively, on a docker container   
-```
--v ${PWD}/certbot_gen/certs:/etc/letsencrypt
+**Dependencies**
+- certs.conf  
+- /certs        #persistent storage  
+- Dockerfile  
+- /gen-certs/certonly.sh  
+  
+**certbot_gen.sh**
+Run interactively, in a docker container   
+mounted volumes:
+${PWD}/certbot_gen/certs:/etc/letsencrypt
 ```
 Mount from a local directory /certs, onto /etc/letsencrypt inside the container   
 	- This persistant folder contains the generated letsencrypt certs as described below  
