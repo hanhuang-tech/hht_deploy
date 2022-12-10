@@ -60,8 +60,7 @@ bash hht-deploy.sh
 ```
 ---   
 ### certbot_gen
-- /bin/sh script for the below commands.   
-```
+>/bin/sh script to do the below actions.   
 **Dependencies**
 - certs.conf  
 - /certs        #persistent storage  
