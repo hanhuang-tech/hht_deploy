@@ -61,21 +61,22 @@ bash hht-deploy.sh
 ---   
 ### certbot_gen
 >/bin/sh script to do the below actions.   
-**Dependencies**
+
+#### Dependencies
 - certs.conf  
-- /certs        #persistent storage  
+- /certs
 - Dockerfile  
 - /gen-certs/certonly.sh  
   
-**certbot_gen.sh**
+#### certbot_gen.sh  
 - Run interactively, a docker container called certbot_gen, as a daemon on portal 80  
-_Mounted volumes, inside certbot_gen container_
-**certs.conf** /etc/nginx/conf.d/certs.conf
-**certs** /etc/letsencrypt
-	- This persistant folder contains generated letsencrypt certs from certonly.sh
-**/gen-certs** /gen-certs
+_Mounted volumes, inside certbot_gen container_  
+**certs.conf** /etc/nginx/conf.d/certs.conf  
+**/certs** /etc/letsencrypt  
+	- This persistant folder contains generated letsencrypt certs from certonly.sh  
+**/gen-certs** /gen-certs  
 	-/gen-certs: contains certonly.sh  
-	- certonly.sh: certbot instructions to generate letsencrypt certificates. Runs inside certbot_gen container
+	- certonly.sh: certbot instructions to generate letsencrypt certificates. Runs inside certbot_gen container  
 - Execute inside certbot_gen, the working directory of gen-certs, and run certonly.sh  
 
 
