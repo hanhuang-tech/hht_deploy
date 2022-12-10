@@ -1,4 +1,4 @@
-![code](https://hanhuang.tech/img/html.png)
+![code](https://hanhuang.tech/img/deploy.png)
 # hht-deploy
 - Creates containers to deploy the hht frontend static site
 	- Shell script to automate build and running of dependencies
@@ -19,18 +19,16 @@ cd hht_deploy
 bash hht-deploy.sh  
 ```
 ### Features:
-```
-# bash shell script
-# docker/docker-compose
-# cron
-# letsencrypt/certbot
-# nginx
-```
-```
+- bash shell script  
+- docker/docker-compose  
+- cron  
+- letsencrypt/certbot  
+- nginx  
+
 ### Dependencies & tree:
 >hht-deploy.sh, docker-compose.yml, certbot_gen, cert_renew, web
 ```
-├── hht
+├── hht  
 │   ├── clothingsite
 │   ├── hanhuang.tech
 │   └── README.md
@@ -71,30 +69,15 @@ bash hht-deploy.sh
 - /gen-certs/certonly.sh  
   
 **certbot_gen.sh**
-Run interactively, in a docker container   
-mounted volumes:
-${PWD}/certbot_gen/certs:/etc/letsencrypt
-```
-Mount from a local directory /certs, onto /etc/letsencrypt inside the container   
-	- This persistant folder contains the generated letsencrypt certs as described below  
-```
- -v ${PWD}/certbot_gen/gen-certs:/gen-certs
-```
-Mount from a local directory /gen-certs, onto /gen-certs inside the container  
+- Run interactively, a docker container called certbot_gen, as a daemon on portal 80  
+_Mounted volumes, inside certbot_gen container_
+**certs.conf** /etc/nginx/conf.d/certs.conf
+**certs** /etc/letsencrypt
+	- This persistant folder contains generated letsencrypt certs from certonly.sh
+**/gen-certs** /gen-certs
 	-/gen-certs: contains certonly.sh  
-```
--v ${PWD}/certbot_gen/certs.conf:/etc/nginx/conf.d/certs.conf
-```
-Mount certs.conf into /etc/nginx/conf.d/certs.conf  
-```
---rm --name certbot_gen -dp 80:80 certbot_gen
-```
-Run the docker container as a daemon, and map it to port 80  
-	- Name the container as certbot_gen and remove it once it stops  
-```
-docker exec -w /gen-certs certbot_gen bash certonly.sh
-```
-Execute inside the working directory certbot_gen, and run certonly.sh  
+	- certonly.sh: certbot instructions to generate letsencrypt certificates. Runs inside certbot_gen container
+- Execute inside certbot_gen, the working directory of gen-certs, and run certonly.sh  
 
 
 cron: At 12:00 in every month
