@@ -70,7 +70,8 @@ bash hht-deploy.sh
   
 #### certbot_gen.sh  
 - Run interactively, a docker container called certbot_gen, as a daemon on portal 80  
-_Mounted volumes, inside certbot_gen container_  
+  
+_Mounted volumes. Inside certbot_gen container_  
 **certs.conf** /etc/nginx/conf.d/certs.conf  
 **/certs** /etc/letsencrypt  
 	- This persistant folder contains generated letsencrypt certs from certonly.sh  

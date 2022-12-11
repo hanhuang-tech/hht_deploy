@@ -1,2 +1,1 @@
 00 12 * */1 * certbot renew >> /cert-renew.log 2>&1
-01 12 */1 * * nginx -s reload >> /cert-renew.log 2>&1
