@@ -1,13 +1,15 @@
-![code](https://hanhuang.tech/img/deploy.png)
-# hht-deploy
-- Creates containers to deploy the hht frontend static site
-	- Shell script to automate build and running of dependencies
-	- Temporary creation and removal of container and generation of TLS certificates using certbot
-	- Container with cron job to renew letsencrypt certificates that runs every month
-	- Nginx container with reverse proxy to server name hanhuang.tech using conf files
+#hht-deploy
+![code](https://hanhuang.tech/img/smalldeploy.png)
+>Deploys the [hht](https://github.com/hanhuang-tech/hht) frontend static site files using TLS encryption and containerisation
+- Temporary creation of container and generation of Letsencrypt certificates using certbot
+- Cron to attempt renewal of Letsencrypt certificates once a month
+- Cron to do a Git pull of static files every day from Github
+- Nginx container with reverse proxy to encrypted site hanhuang.tech
+- Shell script to automate builds and running of dependencies for deployment
   
 ### To use:  
->Requirements: /hht pulled from git@github.com:hanhuang-tech/hht.git
+>Requirements: git pull /hht from git@github.com:hanhuang-tech/hht.git
+As below
 ```
 mkdir hht  
 cd hht  
@@ -19,9 +21,9 @@ cd hht_deploy
 bash hht-deploy.sh  
 ```
 ### Features:
-- bash shell script  
-- docker/docker-compose  
-- cron  
+- Bash Shell Scripting
+- Docker/Docker-compose  
+- Cron
 - letsencrypt/certbot  
 - nginx  
 
@@ -69,9 +71,9 @@ bash hht-deploy.sh
 - /gen-certs/certonly.sh  
   
 #### certbot_gen.sh  
-- Run interactively, a docker container called certbot_gen, as a daemon on portal 80  
+>Run interactively, a docker container called certbot_gen, as a daemon on portal 80  
   
-_Mounted volumes. Inside certbot_gen container_  
+_Mounted volumes_  
 **certs.conf** /etc/nginx/conf.d/certs.conf  
 **/certs** /etc/letsencrypt  
 	- This persistant folder contains generated letsencrypt certs from certonly.sh  
