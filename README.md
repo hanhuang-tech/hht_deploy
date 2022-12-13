@@ -1,15 +1,15 @@
-#hht-deploy
-![code](https://hanhuang.tech/img/smalldeploy.png)
->Deploys the [hht](https://github.com/hanhuang-tech/hht) frontend static site files using TLS encryption and containerisation
-- Temporary creation of container and generation of Letsencrypt certificates using certbot
-- Cron to attempt renewal of Letsencrypt certificates once a month
-- Cron to do a Git pull of static files every day from Github
-- Nginx container with reverse proxy to encrypted site hanhuang.tech
-- Shell script to automate builds and running of dependencies for deployment
+# hht-deploy  
+![code](https://hanhuang.tech/img/smalldeploy.png)  
+>Deploys the [hht](https://github.com/hanhuang-tech/hht) frontend static site files using TLS encryption and containerisation  
+- Temporary creation of container and generation of Letsencrypt certificates using certbot  
+- Cron to attempt renewal of Letsencrypt certificates once a month  
+- Cron to do a Git pull of static files every day from Github  
+- Nginx container with reverse proxy to encrypted site hanhuang.tech  
+- Shell script to automate builds and running of dependencies for deployment  
   
 ### To use:  
->Requirements: git pull /hht from git@github.com:hanhuang-tech/hht.git
-As below
+>Requirements: git pull /hht from git@github.com:hanhuang-tech/hht.git  
+As below  
 ```
 mkdir hht  
 cd hht  
@@ -21,14 +21,14 @@ cd hht_deploy
 bash hht-deploy.sh  
 ```
 ### Features:
-- Bash Shell Scripting
+- Bash Shell Scripting  
 - Docker/Docker-compose  
-- Cron
-- letsencrypt/certbot  
+- Cron  
+- letsencrypt/certbot   
 - nginx  
-
-### Dependencies & tree:
->hht-deploy.sh, docker-compose.yml, certbot_gen, cert_renew, web
+  
+### Dependencies & tree:  
+>hht-deploy.sh, docker-compose.yml, certbot_gen, cert_renew, web  
 ```
 ├── hht  
 │   ├── clothingsite
