@@ -1,6 +1,7 @@
 # hht-deploy  
 ![code](https://hanhuang.tech/img/smalldeploy.png)  
-Deploys the [hht](https://github.com/hanhuang-tech/hht) frontend static site files using TLS encryption and containerisation  
+  
+### Deploys the [hht](https://github.com/hanhuang-tech/hht) frontend static site files using TLS encryption and containerisation  
 - Temporary creation of container and generation of Letsencrypt certificates using certbot  
 - Cron to attempt renewal of Letsencrypt certificates once a month  
 - Cron to do a Git pull of static files every day from Github  
@@ -17,6 +18,7 @@ git pull git@github.com:hanhuang-tech/hht.git
 
 ```
 ### To use:
+>hht_deploy from git@github.com:hanhuang-tech/hht_deploy.git
 ```
 cd ..
 mkdir hht_deploy  
@@ -32,11 +34,13 @@ bash hht-deploy.sh
 - letsencrypt/certbot   
 - nginx  
   
-### Dependencies & tree:  
+### Dependencies:  
 |Directory|Dependencies|  
 |---------|------------|   
 |hht|hanhuang.tech, clothingsite|  
 |hht_deploy|certbot_gen, cert_renew, docker-compose.yml, hht-deploy.sh, web|  
+  
+### Tree:  
 ```
 ├── hht  
 │   ├── clothingsite
@@ -69,18 +73,16 @@ bash hht-deploy.sh
             └── info
 ```
 ### certbot_gen  
->Shell script to run the below actions.   
+Shell script to run the below actions.   
 #### certbot_gen.sh  
->Run interactively, a docker container called certbot_gen, as a daemon on portal 80  
-  
-Mounted volumes  
-**certs.conf** /etc/nginx/conf.d/certs.conf  
-**/certs** /etc/letsencrypt  
-	- This persistant folder contains generated letsencrypt certs from certonly.sh  
-**/gen-certs** /gen-certs  
-	-/gen-certs: contains certonly.sh  
-	- certonly.sh: certbot instructions to generate letsencrypt certificates. Runs inside certbot_gen container  
-- Execute inside certbot_gen, the working directory of gen-certs, and run certonly.sh  
+* Run interactively, a docker container called certbot_gen, as a daemon on portal 80  
+* Execute inside certbot_gen, the working directory of gen-certs, and run certonly.sh  
+* Mounted volumes  
+|From <local>|To <inside container>|
+|------------|---------------------|
+|certs.conf|/etc/nginx/conf.d/certs.conf|
+|/certs|/etc/letsencrypt <Persistant folder that contains generated letsencrypt certs from certonly.sh>|  
+|/gen-certs|/gen-certs <Contains certonly.sh: certbot instructions to generate letsencrypt certificates. Runs inside certbot_gen container>|
 
 
 cron: At 12:00 in every month
