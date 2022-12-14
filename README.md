@@ -1,26 +1,31 @@
 # hht-deploy  
 ![code](https://hanhuang.tech/img/smalldeploy.png)  
->Deploys the [hht](https://github.com/hanhuang-tech/hht) frontend static site files using TLS encryption and containerisation  
+Deploys the [hht](https://github.com/hanhuang-tech/hht) frontend static site files using TLS encryption and containerisation  
 - Temporary creation of container and generation of Letsencrypt certificates using certbot  
 - Cron to attempt renewal of Letsencrypt certificates once a month  
 - Cron to do a Git pull of static files every day from Github  
 - Nginx container with reverse proxy to encrypted site hanhuang.tech  
 - Shell script to automate builds and running of dependencies for deployment  
   
-### To use:  
->Requirements: git pull /hht from git@github.com:hanhuang-tech/hht.git  
-As below  
+### Set-up:
+>hht from git@github.com:hanhuang-tech/hht.git  
 ```
 mkdir hht  
 cd hht  
 git init  
 git pull git@github.com:hanhuang-tech/hht.git  
-cd ..  
+
+```
+### To use:
+```
+cd ..
 mkdir hht_deploy  
 cd hht_deploy  
+git init  
+git pull git@github.com:hanhuang-tech/hht_deploy.git  
 bash hht-deploy.sh  
 ```
-### Features:
+### Features:  
 - Bash Shell Scripting  
 - Docker/Docker-compose  
 - Cron  
@@ -28,7 +33,10 @@ bash hht-deploy.sh
 - nginx  
   
 ### Dependencies & tree:  
->hht-deploy.sh, docker-compose.yml, certbot_gen, cert_renew, web  
+|Directory|Dependencies|  
+|---------|------------|   
+|hht|hanhuang.tech, clothingsite|  
+|hht_deploy|certbot_gen, cert_renew, docker-compose.yml, hht-deploy.sh, web|  
 ```
 ├── hht  
 │   ├── clothingsite
@@ -60,20 +68,12 @@ bash hht-deploy.sh
             ├── hanhuang.tech
             └── info
 ```
----   
-### certbot_gen
->/bin/sh script to do the below actions.   
-
-#### Dependencies
-- certs.conf  
-- /certs
-- Dockerfile  
-- /gen-certs/certonly.sh  
-  
+### certbot_gen  
+>Shell script to run the below actions.   
 #### certbot_gen.sh  
 >Run interactively, a docker container called certbot_gen, as a daemon on portal 80  
   
-_Mounted volumes_  
+Mounted volumes  
 **certs.conf** /etc/nginx/conf.d/certs.conf  
 **/certs** /etc/letsencrypt  
 	- This persistant folder contains generated letsencrypt certs from certonly.sh  
