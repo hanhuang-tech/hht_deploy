@@ -82,7 +82,7 @@ bash hht-deploy.sh
 #### certbot_gen.sh  
 * Run interactively, a docker container called certbot_gen, as a daemon on portal 80  
 * Execute inside certbot_gen, the working directory of gen-certs, and run certonly.sh  
-* Mounted volumes
+* Mounted volumes  
 |From <local>|To <inside container>|
 |------------|---------------------|
 |certs.conf|/etc/nginx/conf.d/certs.conf|
@@ -93,7 +93,7 @@ bash hht-deploy.sh
 >Spins up a container to run crontab automation scripts
 - Attempts to renew Letsencrypt certificates once every month at 12:00
 #### certbot_gen.sh
-- Mounted volumes
+- Mounted volumes  
 |From <local>|To <inside container>|
 |------------|---------------------|
 |certs|/etc/letsencrypt| 
