@@ -72,7 +72,9 @@ bash hht-deploy.sh
             ├── hanhuang.tech
             └── info
 ```
+---
 >Breakdown of dependencies  
+
 ### certbot_gen  
 >Spins up a container temporarily to install letsencrypt certificates  
 - Creates a container with server block pointing to location an acme-challenge for Certbot authentication    
@@ -83,7 +85,8 @@ bash hht-deploy.sh
 * Run interactively, a docker container called certbot_gen, as a daemon on portal 80  
 * Execute inside certbot_gen, the working directory of gen-certs, and run certonly.sh  
 * Mounted volumes  
-|From (local)|To (inside container)|  
+  
+|From <local>|To <inside container>|  
 |------------|---------------------|  
 |certs.conf|/etc/nginx/conf.d/certs.conf|  
 |/certs|/etc/letsencrypt <Persistant folder that contains generated letsencrypt certs from certonly.sh>|  
@@ -94,7 +97,8 @@ bash hht-deploy.sh
 - Attempts to renew Letsencrypt certificates once every month at 12:00
 #### certbot_gen.sh
 - Mounted volumes  
-|From (local)|To (inside container)|  
+  
+|From <local>|To <inside container>|  
 |------------|---------------------|  
 |certs|/etc/letsencrypt|   
   
