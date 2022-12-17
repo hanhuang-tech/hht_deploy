@@ -11,6 +11,7 @@ services:
             - ./web/html:/usr/share/nginx/html/
             - ../hht/hanhuang.tech:/usr/share/nginx/html/hanhuang.tech
             - ../hht/clothingsite:/usr/share/nginx/html/clothingsite	
+            - ../hht/error-pages:/usr/share/nginx/html/error-pages
             - ./certbot_gen/certs:/etc/letsencrypt
     cert-renew:
         build: ./cert_renew

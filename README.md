@@ -29,10 +29,10 @@ bash hht-deploy.sh
 ```
 ### Features:  
 - Bash Shell Scripting  
-- Docker/Docker-compose  
+- Docker/Docker compose  
 - Cron  
-- letsencrypt/certbot   
-- nginx  
+- Letsencrypt/Certbot   
+- Nginx  
   
 ### Dependencies:  
 |Directory|Dependencies|  
@@ -72,16 +72,17 @@ bash hht-deploy.sh
             ├── hanhuang.tech
             └── info
 ```
+>Breakdown of dependencies  
 ### certbot_gen  
->Spins up a container temporarily to install Letsencrypt certificates  
+>Spins up a container temporarily to install letsencrypt certificates  
 - Creates a container with server block pointing to location an acme-challenge for Certbot authentication    
 - Generates Letsencrypt certificates using Certbot  
-- Stores Letsencrypt certificates in a persistent folder /certs  
+- Stores Letsencrypt certificates in a persistent folder named /certs  
 - Stops and removes the container  
 #### certbot_gen.sh  
 * Run interactively, a docker container called certbot_gen, as a daemon on portal 80  
 * Execute inside certbot_gen, the working directory of gen-certs, and run certonly.sh  
-* Mounted volumes as below
+* Mounted volumes
 |From <local>|To <inside container>|
 |------------|---------------------|
 |certs.conf|/etc/nginx/conf.d/certs.conf|
@@ -89,12 +90,13 @@ bash hht-deploy.sh
 |/gen-certs|/gen-certs <Contains certonly.sh: certbot instructions to generate letsencrypt certificates. Runs inside certbot_gen container>|
 
 ### cert_renew
-Shell script to run the below actions.
+>Spins up a container to run crontab automation scripts
+- Attempts to renew Letsencrypt certificates once every month at 12:00
 #### certbot_gen.sh
-#### certs.conf
-
-
-
-
-
-cron: At 12:00 in every month
+- Mounted volumes
+|From <local>|To <inside container>|
+|------------|---------------------|
+|certs|/etc/letsencrypt| 
+  
+### hht_deploy.sh
+Cron: Change into /hht directory and performs git pull, at 12:00 in everyday
