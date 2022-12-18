@@ -1,7 +1,7 @@
 # hht-deploy  
 ![code](https://hanhuang.tech/img/smalldeploy.png)  
   
-### Deploys the [hht](https://github.com/hanhuang-tech/hht) frontend static site files using TLS encryption and containerisation  
+### Deploys the [hht](https://github.com/hanhuang-tech/hht) frontend static site using TLS encryption and containerisation  
 - Temporary creation of container and generation of Letsencrypt certificates using certbot  
 - Cron to attempt renewal of Letsencrypt certificates once a month  
 - Cron to do a Git pull of static files every day from Github  
@@ -73,34 +73,81 @@ bash hht-deploy.sh
             └── info
 ```
 ---
->Breakdown of dependencies  
+_Breakdown of dependencies_  
 
-### certbot_gen  
+### /certbot_gen  
 >Spins up a container temporarily to install letsencrypt certificates  
 - Creates a container with server block pointing to location an acme-challenge for Certbot authentication    
 - Generates Letsencrypt certificates using Certbot  
 - Stores Letsencrypt certificates in a persistent folder named /certs  
 - Stops and removes the container  
 #### certbot_gen.sh  
-* Run interactively, a docker container called certbot_gen, as a daemon on portal 80  
-* Execute inside certbot_gen, the working directory of gen-certs, and run certonly.sh  
-* Mounted volumes  
+- Run interactively, a docker container called certbot_gen, as a daemon on portal 80  
+- Execute inside certbot_gen, the working directory of gen-certs, and run certonly.sh  
+	- Mounted volumes  
   
 |From <local>|To <inside container>|  
 |------------|---------------------|  
 |certs.conf|/etc/nginx/conf.d/certs.conf|  
 |/certs|/etc/letsencrypt <Persistant folder that contains generated letsencrypt certs from certonly.sh>|  
 |/gen-certs|/gen-certs <Contains certonly.sh: certbot instructions to generate letsencrypt certificates. Runs inside certbot_gen container>|  
-
-### cert_renew
->Spins up a container to run crontab automation scripts
-- Attempts to renew Letsencrypt certificates once every month at 12:00
-#### certbot_gen.sh
-- Mounted volumes  
+#### Dockerfile  
+- Starts and Nginx alpine container  
+- Add certbot  
+- Add bash  
+- Expose port 80  
+  
+### /cert_renew  
+>Spins up a container to run crontab automation scripts  
+- Attempts to renew Letsencrypt certificates once every month
+#### Dockerfile  
+Start inside container:
+- Copy crontab job into crontabs root dir  
+- Start cron daemon in foreground  
+#### crontab
+- Cron job: Runs Cert renew once every month at 12:00
+#### run-renew.sh
+- Builds and runs a detached container  
+	- Mounted volumes  
   
 |From <local>|To <inside container>|  
 |------------|---------------------|  
 |certs|/etc/letsencrypt|   
+
+### docker-compose.yml
+Orchestrates containers below
+- cert_renew container
+- web container on port 80 and port 443
+	- Mounted volumes
+
+|From (local)|To (inside container)|
+|------------|---------------------|
+|nginx.conf|/etc/nginx/nginx.conf|
+|hanhuang.tech.conf|/etc/nginx/conf.d/hanhuang.tech.conf|
+|clothingsite.conf|/etc/nginx/conf.d/clothingsite.conf|
+|/html|/usr/share/nginx/html/|
+|/hanhuang.tech|/usr/share/nginx/html/hanhuang.tech|
+|/hht/clothingsite|/usr/share/nginx/html/clothingsite|
+|/error-pages|/usr/share/nginx/html/error-pages|
+|/certs|/etc/letsencrypt|
   
-### hht_deploy.sh
-Cron: Change into /hht directory and performs git pull, at 12:00 in everyday
+### hht_deploy.sh  
+- Builds, starts and stops certbot_gen container  
+- Runs docker-compose.yml in detached mode  
+- Issues cron job in local: Change into /hht directory and performs git pull from origin on master branch, at 12:00 in everyday  
+  
+### /web  
+- Nginx configuration for [hht](https://github.com/hanhuang-tech/hht), frontend static site using TLS encryption and containerisation  
+  
+#### /conf    
+>Mounter volume  
+- Inside /conf  
+  
+|.conf file|Description|  
+|----------|-----------|  
+|nginx.conf|Generic nginx.conf file, include .conf file directory|  
+|hanhuang.tech.conf|Reverse proxy for redirection of HTTP traffic to HTTPS and server blocks for root pages|  
+|clothingsite.conf|Reverse proxy for redirection of HTTP traffic to HTTPS and server blocks for root pages|  
+  
+#### Dockerfile  
+- Runs an Nginx container and expose ports 80 and 443  
