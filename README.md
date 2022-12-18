@@ -86,7 +86,7 @@ _Breakdown of dependencies_
 - Execute inside certbot_gen, the working directory of gen-certs, and run certonly.sh  
 	- Mounted volumes  
   
-|From <local>|To <inside container>|  
+|From (local)|To (inside container)|  
 |------------|---------------------|  
 |certs.conf|/etc/nginx/conf.d/certs.conf|  
 |/certs|/etc/letsencrypt <Persistant folder that contains generated letsencrypt certs from certonly.sh>|  
@@ -96,6 +96,7 @@ _Breakdown of dependencies_
 - Add certbot  
 - Add bash  
 - Expose port 80  
+  
   
 ### /cert_renew  
 >Spins up a container to run crontab automation scripts  
@@ -110,10 +111,11 @@ Start inside container:
 - Builds and runs a detached container  
 	- Mounted volumes  
   
-|From <local>|To <inside container>|  
+|From (local)|To (inside container)|  
 |------------|---------------------|  
 |certs|/etc/letsencrypt|   
 
+  
 ### docker-compose.yml
 Orchestrates containers below
 - cert_renew container
@@ -131,10 +133,12 @@ Orchestrates containers below
 |/error-pages|/usr/share/nginx/html/error-pages|
 |/certs|/etc/letsencrypt|
   
+  
 ### hht_deploy.sh  
 - Builds, starts and stops certbot_gen container  
 - Runs docker-compose.yml in detached mode  
 - Issues cron job in local: Change into /hht directory and performs git pull from origin on master branch, at 12:00 in everyday  
+  
   
 ### /web  
 - Nginx configuration for [hht](https://github.com/hanhuang-tech/hht), frontend static site using TLS encryption and containerisation  
