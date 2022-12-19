@@ -125,7 +125,6 @@ Start inside container:
 |nginx.conf|/etc/nginx/nginx.conf|
 |hanhuang.tech.conf|/etc/nginx/conf.d/hanhuang.tech.conf|
 |clothingsite.conf|/etc/nginx/conf.d/clothingsite.conf|
-|/html|/usr/share/nginx/html/|
 |/hanhuang.tech|/usr/share/nginx/html/hanhuang.tech|
 |/hht/clothingsite|/usr/share/nginx/html/clothingsite|
 |/error-pages|/usr/share/nginx/html/error-pages|
