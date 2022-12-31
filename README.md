@@ -127,7 +127,6 @@ Start inside container:
 |clothingsite.conf|/etc/nginx/conf.d/clothingsite.conf|
 |/hanhuang.tech|/usr/share/nginx/html/hanhuang.tech|
 |/hht/clothingsite|/usr/share/nginx/html/clothingsite|
-|/error-pages|/usr/share/nginx/html/error-pages|
 |/certs|/etc/letsencrypt|
     
 ### hht_deploy.sh  
