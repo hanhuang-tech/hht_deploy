@@ -145,8 +145,9 @@ Start inside container:
 |.conf file|Description|  
 |----------|-----------|  
 |nginx.conf|Generic nginx.conf file, include .conf file directory|  
-|hanhuang.tech.conf|Reverse proxy for redirection of HTTP traffic to HTTPS and server blocks for root pages|  
-|clothingsite.conf|Reverse proxy for redirection of HTTP traffic to HTTPS and server blocks for root pages|  
+|hanhuang.tech.conf|Server block for reverse proxy and redirection of HTTP traffic to HTTPS, as well as location blocks for root pages|  
+|clothingsite.conf|Server block for reverse proxy and redirection of HTTP traffic to HTTPS, as well as location blocks for root pages|  
   
 #### Dockerfile  
+- Add apk for php-fpm
 - Runs an Nginx container and expose ports 80 and 443  
