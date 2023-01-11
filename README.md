@@ -133,7 +133,8 @@ Start inside container:
 >Orchestration of containers, scripts and cron jobs
 - Builds, starts and stops certbot_gen container  
 - Runs docker-compose.yml in detached mode  
-- Issues cron job in local: Change into /hht directory and performs git pull from origin on master branch, at 12:00 in everyday  
+- Issues local command via crontab: Change into /hht directory and performs git pull from origin on master branch, at 12:00 everyday  
+- Issues local command via crontab: Truncates logs of all containers to 100 lines, at 12:00 everyday  
   
 ### /web  
 >Nginx configuration for [hht](https://github.com/hanhuang-tech/hht), frontend static site using TLS encryption and containerisation  
