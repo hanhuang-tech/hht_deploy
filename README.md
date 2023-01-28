@@ -112,13 +112,14 @@ Start inside container:
   
 |From (local)|To (inside container)|  
 |------------|---------------------|  
-|certs|/etc/letsencrypt|   
+|certs|/etc/letsencrypt|     
 
-### docker-compose.yml
->Orchestrates containers
-- cert_renew container
-- web container on port 80 and port 443
-	- Mounted volumes
+### docker-compose.yml  
+>Orchestrates containers  
+- cert_renew container  
+- web container on port 80 and port 443  
+    - Passes environment variables from var.env to container  
+	- Mounted volumes  
 
 |From (local)|To (inside container)|
 |------------|---------------------|
@@ -130,8 +131,9 @@ Start inside container:
 |/certs|/etc/letsencrypt|
     
 ### hht_deploy.sh  
->Orchestration of containers, scripts and cron jobs
+>Orchestration of containers, scripts and cron jobs  
 - Builds, starts and stops certbot_gen container  
+- Sets and passes environmental variables into var.env, to be used in docker-compose.yml  
 - Runs docker-compose.yml in detached mode  
 - Issues local command via crontab: Change into /hht directory and performs git pull from origin on master branch, at 12:00 everyday  
 - Issues local command via crontab: Truncates logs of all containers to 100 lines, at 12:00 everyday  

@@ -12,6 +12,11 @@ services:
             - ../hht/hanhuang.tech:/usr/share/nginx/html/hanhuang.tech
             - ../hht/clothingsite:/usr/share/nginx/html/clothingsite	
             - ./certbot_gen/certs:/etc/letsencrypt
+        env_file:
+            - var.env
+        environment:
+            - IP4=$IP4
+            - AZ=$AZ
     cert-renew:
         build: ./cert_renew
         volumes:
