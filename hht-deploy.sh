@@ -1,11 +1,4 @@
 #!/bin/sh
-#creating docker-compose env file
-export IP4=$(curl -s http://169.254.169.254/2022-09-24/meta-data/public-ipv4)
-export AZ=$(curl -s http://169.254.169.254/2022-09-24/meta-data/placement/availability-zone)
-cat >> var.env<< EOF
-IP=$IP4
-AZ=$AZ
-EOF
 #docker build
 docker build -t certbot_gen certbot_gen
 bash ${PWD}/certbot_gen/certbot-gen.sh

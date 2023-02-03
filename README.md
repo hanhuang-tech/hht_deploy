@@ -118,8 +118,7 @@ Start inside container:
 >Orchestrates containers  
 - cert_renew container  
 - web container on port 80 and port 443  
-    - Passes environment variables from var.env to container  
-	- Mounted volumes  
+- Mounted volumes  
 
 |From (local)|To (inside container)|
 |------------|---------------------|
