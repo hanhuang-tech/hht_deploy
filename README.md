@@ -11,15 +11,15 @@
   
 ### Steps:  
 1. Docker volume certs: Is created (This is the persistent volume that we will store certs in and mount from)  
-2a. Docker build and run: Certbot_gen container  
-2b. Certbot Acme-challenge: Script and Nginx server/location block gets called inside certbot_gen container on port 80  
-2c. Docker stop: certbot_gen container (Frees up port 80 for our web server)  
-3a. Docker compose web: Build and run web-server container. Ports opened: 80, 443, 9000  
-3b. Docker compose web: Mount from local to this container, Nginx .conf files  
-3c. Docker compose web: Mount from local to this container, Frontend files  
-3d. Docker compose web: Mount docker volume 'certs' to letsencrypt directory inside container  
-4a. Docker compose cert-renew: Build and run certificate renewal container  
-4b. Docker compose cert-renew: Mount docker volume 'certs' to letsencrypt directory inside container  
+2. Docker build and run: Certbot_gen container  
+2a. Certbot Acme-challenge: Script and Nginx server/location block gets called inside certbot_gen container on port 80  
+2b. Docker stop: certbot_gen container (Frees up port 80 for our web server)  
+3. Docker compose web: Build and run web-server container. Ports opened: 80, 443, 9000  
+3a. Docker compose web: Mount from local to this container, Nginx .conf files  
+3b. Docker compose web: Mount from local to this container, Frontend files  
+3c. Docker compose web: Mount docker volume 'certs' to letsencrypt directory inside container  
+4. Docker compose cert-renew: Build and run certificate renewal container  
+4a. Docker compose cert-renew: Mount docker volume 'certs' to letsencrypt directory inside container  
 5. Copy: Copies Git pull cron file to local cron directory   
 
 ### Set-up:
