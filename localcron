@@ -1,3 +1,0 @@
-00 12 */1 * * su -s /bin/sh root -c 'cd /home/han/hht && /bin/git pull origin master --quiet' 2>&1
-00 12 */1 * * truncate -s 100 /var/lib/docker/containers/*/*-json.log 2>&1
-

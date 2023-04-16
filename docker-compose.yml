@@ -11,9 +11,9 @@ services:
             - ./web/conf/clothingsite.conf:/etc/nginx/conf.d/clothingsite.conf
             - ../hht/hanhuang.tech:/usr/share/nginx/html/hanhuang.tech
             - ../hht/clothingsite:/usr/share/nginx/html/clothingsite	
-            - ./certbot_gen/certs:/etc/letsencrypt
+            - /var/lib/docker/volumes/certs:/etc/letsencrypt
     cert-renew:
         build: ./cert_renew
         volumes:
-            - ./certbot_gen/certs:/etc/letsencrypt
+            - /var/lib/docker/volumes/certs:/etc/letsencrypt
 
