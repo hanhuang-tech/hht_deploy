@@ -2,12 +2,26 @@
 ![code](https://hanhuang.tech/img/smalldeploy.png)  
   
 ### Deploys the [hht](https://github.com/hanhuang-tech/hht) frontend static site using TLS encryption and containerisation  
-- Temporary creation of container and generation of Letsencrypt certificates using certbot  
-- Cron to attempt renewal of Letsencrypt certificates once a month  
-- Cron to do a Git pull of static files every day from Github  
-- Nginx container with reverse proxy to encrypted site hanhuang.tech  
-- Shell script to automate builds and running of dependencies for deployment  
+>Features:    
+- Spin up and down of container: Generation of Letsencrypt certificates with certbot  
+- Cron: Renewal of Letsencrypt certificates once a month  
+- Cron: Git pull of files into local, once a day from Github  
+- Web app: Container using Nginx with reverse proxy to encrypted site hanhuang.tech  
+- Bash Shell: Scripts to automate builds and running of dependencies for deployment  
   
+### Steps:  
+1. Docker volume certs: Is created (This is the persistent volume that we will store certs in and mount from)  
+2a. Docker build and run: Certbot_gen container  
+2b. Certbot Acme-challenge: Script and Nginx server/location block gets called inside certbot_gen container on port 80  
+2c. Docker stop: certbot_gen container (Frees up port 80 for our web server)  
+3a. Docker compose web: Build and run web-server container. Ports opened: 80, 443, 9000  
+3b. Docker compose web: Mount from local to this container, Nginx .conf files  
+3c. Docker compose web: Mount from local to this container, Frontend files  
+3d. Docker compose web: Mount docker volume 'certs' to letsencrypt directory inside container  
+4a. Docker compose cert-renew: Build and run certificate renewal container  
+4b. Docker compose cert-renew: Mount docker volume 'certs' to letsencrypt directory inside container  
+5. Copy: Copies Git pull cron file to local cron directory   
+
 ### Set-up:
 >hht from git@github.com:hanhuang-tech/hht.git  
 ```
