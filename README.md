@@ -141,7 +141,7 @@ Start inside container:
 |nginx.conf|/etc/nginx/nginx.conf|
 |hanhuang.tech.conf|/etc/nginx/conf.d/hanhuang.tech.conf|
 |clothingsite.conf|/etc/nginx/conf.d/clothingsite.conf|
-|/hanhuang.tech|/usr/share/nginx/html/hanhuang.tech|
+|/hht/hanhuang.tech|/usr/share/nginx/html/hanhuang.tech|
 |/hht/clothingsite|/usr/share/nginx/html/clothingsite|
 |/var/lib/docker/volumes/certs|/etc/letsencrypt|
   
