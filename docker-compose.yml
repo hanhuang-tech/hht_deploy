@@ -9,6 +9,7 @@ services:
             - ./web/conf/nginx.conf:/etc/nginx/nginx.conf
             - ./web/conf/hanhuang.tech.conf:/etc/nginx/conf.d/hanhuang.tech.conf
             - ./web/conf/clothingsite.conf:/etc/nginx/conf.d/clothingsite.conf
+            - ./web/conf/sed.sh:/etc/nginx/conf.d/sed.sh
             - ../hht/hanhuang.tech:/usr/share/nginx/html/hanhuang.tech
             - ../hht/clothingsite:/usr/share/nginx/html/clothingsite	
             - /var/lib/docker/volumes/certs:/etc/letsencrypt
