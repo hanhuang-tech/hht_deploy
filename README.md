@@ -4,9 +4,10 @@
 ### Deploys the [hht](https://github.com/hanhuang-tech/hht) frontend static site using TLS encryption and containerisation  
 >Features    
 - Spin up and down of container: Generation of Letsencrypt certificates with certbot  
-- Certbot/Cron: Renewal of Letsencrypt certificates once a month  
-- Cron: Git pull of files into local, once a day from Github  
+- Cron/Certbot: Renewal of Letsencrypt certificates once a month  
+- Cron/Git: Git pull of files into local, once a day from Github  
 - Web: Container using Nginx with reverse proxy to encrypted site hanhuang.tech  
+- Web: API Get from meta-data of origin and setting of html  
 - Bash Shell: Scripts to automate builds and running of dependencies for deployment  
   
 ### Steps:  
@@ -15,13 +16,14 @@
 2. Docker: Build and run 'Certbot_gen' container  
 a. Certbot: Acme-challenge script and Nginx server/location block gets called inside certbot_gen container on port 80  
 b. Docker: Stop certbot_gen container (Frees up port 80 for our web server)  
-3. Docker compose: Build and run 'web' container. This will house our frontend files. Ports opened: 80, 443, 9000  
+3. Bash: API Get from meta-data of origin instance and stream edit html field as these values  
+4. Docker compose: Build and run 'web' container. This will house our frontend files. Ports opened: 80, 443, 9000  
 a. Docker compose: Mount from local to this container, Nginx .conf files  
 b. Docker compose: Mount from local to this container, Frontend files  
 c. Docker compose: Mount docker volume 'certs' to letsencrypt directory inside container  
-4. Docker compose: Build and run 'certbot-renew' certificate renewal container  
+5. Docker compose: Build and run 'certbot-renew' certificate renewal container  
 a. Docker compose: Mount docker volume 'certs' to letsencrypt directory inside container  
-5. Copy: Copies Git pull cron file to local cron directory   
+6. Copy: Copies Git pull cron file to local cron directory   
 
 ### Set-up:
 >Prerequisite: hht from git@github.com:hanhuang-tech/hht.git  
@@ -75,6 +77,7 @@ bash hht-deploy.sh
     ├── docker-compose.yml
     ├── git-local.cron
     ├── hht-deploy.sh
+    ├── sed.sh
     ├── LICENSE
     ├── README.md
     └── web
@@ -141,9 +144,16 @@ Start inside container:
 |nginx.conf|/etc/nginx/nginx.conf|
 |hanhuang.tech.conf|/etc/nginx/conf.d/hanhuang.tech.conf|
 |clothingsite.conf|/etc/nginx/conf.d/clothingsite.conf|
+|sed.sh|./web/conf/sed.sh:/etc/nginx/conf.d/sed.sh|
 |/hht/hanhuang.tech|/usr/share/nginx/html/hanhuang.tech|
 |/hht/clothingsite|/usr/share/nginx/html/clothingsite|
 |/var/lib/docker/volumes/certs|/etc/letsencrypt|
+
+### sed.sh
+>Stream edits environmental variables into html  
+- Sets public IPv4 and Availability zone as local environmental variables  
+- Stream edits these values as specific fields in html files  
+- Expected: Changes are reflected in html files within the mounted volumes  
   
 ### /web  
 >Nginx configuration for [hht](https://github.com/hanhuang-tech/hht), frontend static site using TLS encryption and containerisation  
