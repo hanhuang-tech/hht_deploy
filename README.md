@@ -1,7 +1,7 @@
 # hht-deploy  
 ![code](https://hanhuang.tech/img/smalldeploy.png)  
-
-### Deploys the encrypted hht site using Docker orchestration of mounted Certbot, Shell scripts and Nginx. Automatic pull of source code from Github and renewal of TLS certificates using Cron.
+Deploys the encrypted hht site using Docker orchestration of mounted Certbot, Shell scripts and Nginx. Automatic pull of source code from Github and renewal of TLS certificates using Cron.  
+  
 >Features    
 - Spin up and down of container: To generate of Letsencrypt certificates with certbot  
 - Cron/Certbot: Renewal of Letsencrypt certificates once a month  
