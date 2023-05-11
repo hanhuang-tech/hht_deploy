@@ -2,4 +2,3 @@
 01 01 * * * su -s /bin/sh root -c 'cd /home/han/hht/ && /bin/git pull origin master --quiet'
 01 01 * * * su -s /bin/sh root -c '/home/han/hht_deploy/sed.sh'
 01 01 * * * truncate -s 100 /var/lib/docker/containers/*/*-json.log
-
