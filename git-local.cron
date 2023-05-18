@@ -1,4 +1,3 @@
-00 01 * * * su -s /bin/sh root -c 'cd /home/han/hht/ && /bin/git restore .'
-01 01 * * * su -s /bin/sh root -c 'cd /home/han/hht/ && /bin/git pull origin master --quiet'
+00 01 * * * su -s /bin/sh root -c 'cd /home/han/hht/ && /bin/git checkout master && /bin/git reset --hard origin/master'
 01 01 * * * su -s /bin/sh root -c '/home/han/hht_deploy/sed.sh'
 01 01 * * * truncate -s 100 /var/lib/docker/containers/*/*-json.log
