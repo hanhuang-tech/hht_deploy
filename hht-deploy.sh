@@ -1,13 +1,14 @@
 #!/bin/sh
-#create persistent docker volume
+#certbot renew
 docker volume create certs
-#build and clean up certbot_gen
-docker build -t certbot_gen certbot_gen
-bash ${PWD}/certbot_gen/certbot-gen.sh
-docker stop certbot_gen
-echo -e "\e[44mcertbot_gen completed and stopped, running docker-compose\e[0m"
 #orchestrate containers
 docker-compose up -d
+#generate certbot certificate
+docker exec -it hht_deploy-web-1 /bin/sh /scripts/certgen.sh
+#copy into container new conf files using https
+docker cp web/conf.d/ hht_deploy-web-1:/etc/nginx/
+docker exec -it hht_deploy-web-1 nginx -s reload
+#add env variables to .html on frontend
 /bin/sh sed.sh
 #cron tab for host machine to git pull
 cp git-local.cron /var/spool/cron/root

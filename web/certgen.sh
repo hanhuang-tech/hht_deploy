@@ -5,7 +5,7 @@ certbot certonly --webroot \
 --no-eff-email \
 --cert-name hanhuang.tech \
 -m han@hanhuang.tech \
--w /gen-certs \
+-w /usr/share/nginx/html/ \
 -d hanhuang.tech \
 -d clothingsite.hanhuang.tech
 
