@@ -2,7 +2,7 @@
 #certbot renew
 docker volume create certs
 #orchestrate containers
-docker-compose up -d
+docker compose up -d
 #generate certbot certificate
 docker exec -it hht_deploy-web-1 /bin/sh /scripts/certgen.sh
 #copy into container new conf files using https

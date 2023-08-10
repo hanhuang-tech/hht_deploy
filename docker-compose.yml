@@ -4,13 +4,11 @@ services:
         ports:
             - "80:80"
             - "443:443"
-            - "9000:9000"
         volumes:
             - ../hht/hanhuang.tech:/usr/share/nginx/html/hanhuang.tech
-            - ../hht/clothingsite:/usr/share/nginx/html/clothingsite	
+            - ../hht/clothingsite:/usr/share/nginx/html/clothingsite
             - /var/lib/docker/volumes/certs:/etc/letsencrypt
     certbot-renew:
         build: ./certbot-renew
         volumes:
             - /var/lib/docker/volumes/certs:/etc/letsencrypt
-
