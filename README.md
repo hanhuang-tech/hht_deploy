@@ -21,6 +21,7 @@ Deploys the encrypted hht site using Docker orchestration of mounted Certbot, Sh
 |4.|Docker/Bash: Copy Nginx conf.d folder into 'web' container. Reload Nginx to enable use of .conf files.|
 |5.|Stream editor/Bash: API Get on meta-data of instance and stream edit environmental variables within .html files. Frontend files will need to be cloned into local ahead of time.|
 |6.|Bash: Copies Git pull cron file to local cron directory.|
+|7.|Cron: Start crond process.|
   
 ### Set-up:
 >Prerequisite: hht from git@github.com:hanhuang-tech/hht.git  
