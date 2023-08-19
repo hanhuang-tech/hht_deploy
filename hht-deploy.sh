@@ -12,4 +12,5 @@ docker exec -it hht_deploy-web-1 nginx -s reload
 /bin/sh sed.sh
 #cron tab for host machine to git pull
 cp git-local.cron /var/spool/cron/root
-
+#start cron
+systemctl start crond
