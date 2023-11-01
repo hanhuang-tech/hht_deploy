@@ -53,7 +53,7 @@ bash hht-deploy.sh
 |Directory|Dependencies|  
 |---------|------------|   
 |hht|hanhuang.tech, clothingsite|  
-|hht_deploy|certbot_renew/, docker-compose.yml, hht-deploy.sh, git-local.cron, sed.sh, web/|  
+|hht_deploy|docker-compose.yml, hht-deploy.sh, git-local.cron, sed.sh, web/|  
   
 ### Tree:  
 ```
@@ -61,9 +61,6 @@ bash hht-deploy.sh
 │   ├── clothingsite
 │   ├── hanhuang.tech
 │   └── README.md
-├── certbot-renew
-│   ├── cronjobs
-│   └── Dockerfile
 ├── docker-compose.yml
 ├── git-local.cron
 ├── hht-deploy.sh

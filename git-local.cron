@@ -1,3 +1,4 @@
 00 01 * * * su -s /bin/sh root -c 'cd /home/han/hht/ && /bin/git fetch origin && /bin/git reset --hard origin/master'
 01 01 * * * su -s /bin/sh root -c '/home/han/hht_deploy/sed.sh'
 01 01 * * * truncate -s 100 /var/lib/docker/containers/*/*-json.log
+00 00 01 * * docker exec -it hht_deploy_web_1 certbot renew
