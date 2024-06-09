@@ -1,6 +1,7 @@
 #!/bin/sh
 #certbot renew
 docker volume create certs
+echo "certs volume created"
 #orchestrate containers
 docker compose up -d
 #generate certbot certificate
