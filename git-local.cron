@@ -1,5 +1,5 @@
-00 01 * * * cronitor exec N9VCRj echo $(date) && 'cd /home/han/hht/ && /bin/git fetch origin && /bin/git reset --hard origin/master' >> /home/han/cron.log 2>&1
+00 01 * * * cronitor exec N9VCRj echo $(date) && cd /home/han/hht/ && /bin/git fetch origin && /bin/git reset --hard origin/master >> /home/han/cron.log 2>&1
 01 01 * * * cronitor exec nG2InQ echo $(date) && bash /home/han/hht_deploy/sed.sh >> /home/han/cron.log 2>&1
-01 05 * * * cronitor exec f7fGFh echo $(date) && 'truncate -s 100 /var/lib/docker/containers/*/*-json.log' >> /home/han/cron.log 2>&1
+01 05 * * * cronitor exec f7fGFh echo $(date) && truncate -s 100 /var/lib/docker/containers/*/*-json.log >> /home/han/cron.log 2>&1
 00 00 01 * * cronitor exec jKC0Yb echo $(date) && docker exec -it hht_deploy-web-1 certbot renew >> /home/han/cron.log 2>&1
 01 00 01 * * cronitor exec eZG0W2 echo $(date) && docker exec -it hht_deploy-web-1 nginx -s reload >> /home/han/cron.log 2>&1
