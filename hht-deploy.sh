@@ -15,3 +15,4 @@ docker exec -it hht_deploy-web-1 nginx -s reload
 cp git-local.cron /var/spool/cron/root
 #start cron
 systemctl start crond
+touch /home/han/cron.log
